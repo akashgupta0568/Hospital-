@@ -1,0 +1,65 @@
+<header>
+  <div class="container">
+    <h1>Medical App</h1>
+    <div class="user-info">
+      <p>{{this.email}}</p>
+      <p>{{this.role}}</p>
+    </div>
+    <button class="menu-btn" (click)="toggleMenu()">☰</button>
+    <!-- Desktop Menu -->
+    <nav class="desktop-menu">
+      <ul>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/home">Home</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="/about">About</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="/services">Services</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="/contact">Contact</a>
+        </li>
+
+        <li routerLinkActive="active" style="background-color: red; border-radius: 5px;">
+          <a href="#" (click)="logout()">Logout</a>
+        </li>
+        <!-- Theme Toggle Button inside Menu -->
+        <li>
+          <button class="toggle-theme-btn" (click)="toggleTheme()">🌙</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Sidebar Menu (for Mobile) -->
+<div class="sidebar" [class.open]="menuOpen">
+  <button class="close-btn" (click)="toggleMenu()">✖</button>
+  <nav>
+    <ul>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/home">Home</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/about">About</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/services">Services</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/contact">Contact</a>
+      </li>
+
+      <li routerLinkActive="active">
+        <a href="#" (click)="logout()">Logout</a>
+      </li>
+      <!-- Theme Toggle Button inside Sidebar -->
+      <li>
+        <button class="theme-toggle-btn" (click)="toggleTheme()">Theme 🌙</button>
+      </li>
+
+    </ul>
+  </nav>
+</div>

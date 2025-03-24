@@ -1,0 +1,87 @@
+<div class="register-container">
+  <div class="header">
+    <h2>User Registration</h2>
+    <button class="back-button" (click)="goBack()">Back</button>
+  </div>
+
+  <form (ngSubmit)="registerUser()">
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" [(ngModel)]="user.name" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label>Mobile Number:</label>
+      <input type="text" [(ngModel)]="user.mobile" name="mobile" required>
+    </div>
+
+    <div class="form-group">
+      <label>Alternate Mobile:</label>
+      <input type="text" [(ngModel)]="user.altMobile" name="altMobile">
+    </div>
+
+    <div class="form-group">
+      <label>Age:</label>
+      <input type="number" [(ngModel)]="user.age" name="age" required>
+    </div>
+
+    <div class="form-group">
+      <label>Address:</label>
+      <textarea [(ngModel)]="user.address" name="address" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="user.email" name="email" required>
+    </div>
+
+    <div class="form-group">
+      <label>Password:</label>
+      <input type="password" [(ngModel)]="user.password" name="password" required>
+    </div>
+
+    <div class="form-group">
+      <label>Date of Registration:</label>
+      <input type="date" [(ngModel)]="user.registrationDate" name="registrationDate" required>
+    </div>
+
+    <div class="form-group">
+      <label>Fee Amount:</label>
+      <input type="number" [(ngModel)]="user.feeAmount" name="feeAmount" required>
+    </div>
+
+    <div class="form-group">
+      <label>Type of User:</label>
+      <select [(ngModel)]="user.userType" name="userType" required>
+        <option value="">Select Type</option>
+        <option value="patient">Patient</option>
+        <option value="doctor">Doctor</option>
+        <option value="staff">Staff</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Payment Mode:</label>
+      <div>
+        <input type="radio" name="paymentMode" [(ngModel)]="user.paymentMode" value="Cash"> Cash
+        <input type="radio" name="paymentMode" [(ngModel)]="user.paymentMode" value="Card"> Card
+        <input type="radio" name="paymentMode" [(ngModel)]="user.paymentMode" value="UPI"> UPI
+      </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Services Required:</label>
+      <div>
+        <input type="checkbox" [(ngModel)]="user.services.pharmacy" name="pharmacy"> Pharmacy
+        <input type="checkbox" [(ngModel)]="user.services.labTest" name="labTest"> Lab Test
+        <input type="checkbox" [(ngModel)]="user.services.consultation" name="consultation"> Consultation
+      </div>
+    </div>
+
+    <div *ngIf="userExists" class="error-message">
+      User already exists with this mobile number!
+    </div>
+
+    <button type="submit">Register</button>
+  </form>
+</div>

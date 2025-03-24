@@ -1,0 +1,150 @@
+<div class="add-doctor-container" *ngIf="!showDoctorList">
+  <div class="header">
+    <h2>{{ isEditing ? 'Update Doctor' : 'Add Doctor' }}</h2>
+    <div>
+      <button class="back-button" (click)="toggleDoctorList()">View Doctors</button>
+      &nbsp;
+      <button class="back-button" (click)="goBack()">← Back</button>
+    </div>
+  </div>
+
+  <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <div class="input-container">
+        <input type="text" id="name" formControlName="name" placeholder=" " />
+        <label for="name">Name</label>
+      </div>
+      <div class="error" *ngIf="doctorForm.get('name')?.invalid && doctorForm.get('name')?.touched">
+        Name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-container">
+        <input type="text" id="specialization" formControlName="specialization" placeholder=" " />
+        <label for="specialization">Specialization</label>
+      </div>
+      <div class="error" *ngIf="doctorForm.get('specialization')?.invalid && doctorForm.get('specialization')?.touched">
+        Specialization is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-container">
+        <input type="text" id="phoneNumber" formControlName="phoneNumber" placeholder=" " />
+        <label for="phoneNumber">Phone Number</label>
+      </div>
+      <div class="error" *ngIf="doctorForm.get('phoneNumber')?.invalid && doctorForm.get('phoneNumber')?.touched">
+        <span *ngIf="doctorForm.get('phoneNumber')?.errors?.['required']">Phone Number is required.</span>
+        <span *ngIf="doctorForm.get('phoneNumber')?.errors?.['pattern']">Invalid phone number.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-container">
+        <input type="email" id="email" formControlName="email" placeholder=" " />
+        <label for="email">Email</label>
+      </div>
+      <div class="error" *ngIf="doctorForm.get('email')?.invalid && doctorForm.get('email')?.touched">
+        <span *ngIf="doctorForm.get('email')?.errors?.['required']">Email is required.</span>
+        <span *ngIf="doctorForm.get('email')?.errors?.['email']">Invalid email format.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-container" *ngIf="hospitals && hospitals.length > 0; else noHospital">
+        <select id="hospitalID" formControlName="hospitalID">
+          <option value="" disabled selected>Select Hospital</option>
+          <option *ngFor="let hospital of hospitals" [value]="hospital.hospitalID">
+            {{ hospital.name }}
+          </option>
+        </select>
+        <label for="hospitalID">Hospital</label>
+      </div>
+      <div class="error" *ngIf="doctorForm.get('hospitalID')?.invalid && doctorForm.get('hospitalID')?.touched">
+        Hospital selection is required.
+      </div>
+    </div>
+
+    <ng-template #noHospital>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <p class="text-danger">There is no hospital available.</p>
+        <button class="back-button" (click)="navigateToHospital()">Add Hospital</button>
+      </div>
+    </ng-template>
+
+    <div class="form-group">
+      <div class="input-container">
+        <input type="text" id="consultationFee" formControlName="consultationFee" placeholder=" " />
+        <label for="consultationFee">Consultation Fee</label>
+      </div>
+      <div class="error" *ngIf="doctorForm.get('consultationFee')?.invalid && doctorForm.get('consultationFee')?.touched">
+        <span *ngIf="doctorForm.get('consultationFee')?.errors?.['required']">Consultation fee is required.</span>
+        <span *ngIf="doctorForm.get('consultationFee')?.errors?.['pattern']">Invalid fee amount.</span>
+      </div>
+    </div>
+
+    <!-- Dynamic Button for Add / Update -->
+    <button type="submit" class="submit-button" [disabled]="doctorForm.invalid">
+      {{ isEditing ? 'Update Doctor' : 'Add Doctor' }}
+    </button>
+  </form>
+</div>
+
+<!-- Doctor List Section -->
+<div class="doctors-container" *ngIf="showDoctorList">
+  <div class="header">
+    <h2>Doctor Records</h2>
+    <button class="back-button" (click)="goBack()">Back</button>
+  </div>
+
+  <div class="form-group">
+    <div class="input-container">
+      <label for="hospitalSelect">Select Hospital:</label>
+      <select id="hospitalSelect" [(ngModel)]="selectedHospitalId" (change)="fetchDoctors()">
+        <option value="" disabled selected>Select a Hospital</option>
+        <option *ngFor="let hospital of hospitals" [value]="hospital.hospitalID">
+          {{ hospital.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <input type="text" [(ngModel)]="searchText" placeholder="Search..." class="search-bar">
+    </div>
+
+    <table *ngIf="doctors && doctors.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Specialization</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doctor of doctors | searchFilter: searchText; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ doctor.name }}</td>
+          <td>{{ doctor.specialization }}</td>
+          <td>{{ doctor.email }}</td>
+          <td>{{ doctor.phoneNumber }}</td>
+          <td>
+            <button class="view-button">View</button>
+            &nbsp;
+            <button class="view-button" (click)="editDoctor(doctor.id)">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Show "No doctors in this hospital" if doctors list is empty -->
+    <div *ngIf="(doctors | searchFilter: searchText)?.length === 0" class="no-doctors" style="padding: 15px 0px;">
+      {{this.msg}}
+    </div>
+  </div>
+</div>

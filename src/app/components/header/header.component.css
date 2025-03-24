@@ -1,0 +1,182 @@
+/* HEADER */
+header {
+  background-color: var(--primary-color);
+  color: var(--button-text);
+  padding: 15px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+/* Theme Toggle Button */
+.toggle-theme-btn {
+  background: none;
+  border: none;
+  color: var(--button-text);
+  font-size: 22px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* Menu Button (Hamburger) - Only for Mobile */
+.menu-btn {
+  background: none;
+  border: none;
+  color: var(--button-text);
+  font-size: 26px;
+  cursor: pointer;
+  display: none; /* Hide on desktop */
+}
+
+/* NAVIGATION MENU FOR DESKTOP */
+nav.desktop-menu {
+  display: flex;
+}
+
+nav.desktop-menu ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+nav.desktop-menu ul li {
+  padding: 10px 15px;
+  transition: background 0.3s ease-in-out;
+  border-left: 3px solid transparent; /* Default state */
+  align-content: center;
+}
+
+nav.desktop-menu ul li a {
+  color: var(--button-text);
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+}
+
+/* Active Route (routerLinkActive applies this) */
+nav.desktop-menu ul li.active {
+  border-left: 3px solid var(--secondary-color); /* Left border when active */
+  background: var(--secondary-color);
+  border-radius: 5px;
+}
+
+/* Hover Effect */
+nav.desktop-menu ul li:hover {
+  background: var(--secondary-color);
+  border-radius: 5px;
+}
+
+/* SIDEBAR MENU - Only for Mobile */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Initially hidden on the left */
+  width: 250px;
+  height: 100%;
+  background: var(--primary-color);
+  color: var(--button-text);
+  transition: 0.3s ease-in-out;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2); /* Shadow on right side */
+  padding-top: 60px;
+  display: none; /* Hide on desktop */
+  z-index: 1;
+}
+
+/* When Sidebar Opens */
+.sidebar.open {
+  left: 0; /* Moves to the visible position */
+}
+
+/* Close Button Inside Sidebar */
+.sidebar .close-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px; /* Move close button to left */
+  background: none;
+  border: none;
+  color: var(--button-text);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  padding: 15px;
+  /* text-align: center; */
+  border-left: 3px solid transparent;
+  /*  */
+}
+
+.sidebar nav ul li a {
+  color: var(--button-text);
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+}
+
+/* Active Route in Sidebar */
+.sidebar nav ul li.active {
+  border-left: 3px solid white;
+  border-right: 3px solid white;
+  background: var(--secondary-color);
+}
+
+/* Sidebar Hover Effect */
+.sidebar nav ul li:hover {
+  background: var(--secondary-color);
+  transition: 0.3s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block; /* Show menu button on mobile */
+  }
+
+  nav.desktop-menu {
+    display: none; /* Hide top menu on mobile */
+  }
+
+  .sidebar {
+    display: block; /* Enable sidebar only on mobile */
+  }
+}
+
+/* Sidebar Menu Item Active */
+.sidebar nav ul li a:active {
+  background: var(--secondary-color);
+}
+
+
+.container div {
+  font-size: 14px; /* Adjust size as needed */
+  line-height: 1.2; /* Reduce spacing */
+  text-align: right;
+  margin-left: 10px; /* Adjust spacing */
+}
+
+.container div p {
+  margin: 2px 0; /* Reduce margin */
+}

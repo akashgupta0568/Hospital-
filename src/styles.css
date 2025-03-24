@@ -1,0 +1,37 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+/* Light Mode */
+
+:root {
+  --primary-color: #003b4a;
+  --secondary-color: #005a72;
+  --background-color: #f8fcfd;
+  --text-color: #002b36;
+  --button-bg: #003b4a;
+  --button-text: #ffffff;
+}
+
+/* Dark Mode */
+.dark-mode {
+  --primary-color: #e0f7fa;
+  --secondary-color: #80deea;
+  --background-color: #002b36;
+  --text-color: #ffffff;
+  --button-bg: #80deea;
+  --button-text: #002b36;
+}
+
+/* Apply Colors */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: all 0.3s ease-in-out;
+  margin: 0px;
+  padding: 0px;
+}
+.p-toast .p-toast-message {
+  background-color: var(--primary-color) !important;
+  color: var( --button-text) !important;
+  border-left: 5px solid var(--secondary-color);
+}
+

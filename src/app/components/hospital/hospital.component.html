@@ -1,0 +1,48 @@
+<div class="modal fade show d-block" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="heading text-center">
+      <img src="assets/logo.png" alt="logo" class="logo">
+      <h2>Health Mission</h2>
+      <p>Committed to Your Well-being</p>
+    </div>
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Hospital</h5>
+        <!-- <button type="button" class="close-btn" (click)="closeModal()">
+          <i class="fas fa-times"></i>
+        </button> -->
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <input type="text" class="form-control mb-2" placeholder="Hospital Name" [(ngModel)]="newHospital.name" [ngModelOptions]="{standalone: true}" required>
+
+          <input type="text" class="form-control mb-2" placeholder="Address" [(ngModel)]="newHospital.address" [ngModelOptions]="{standalone: true}" required>
+
+          <input type="text" class="form-control mb-2" placeholder="City" [(ngModel)]="newHospital.city" [ngModelOptions]="{standalone: true}" required>
+
+          <input type="text" class="form-control mb-2" placeholder="State" [(ngModel)]="newHospital.state" [ngModelOptions]="{standalone: true}" required>
+
+          <input type="text" class="form-control mb-2" placeholder="ZIP Code" [(ngModel)]="newHospital.zipCode" [ngModelOptions]="{standalone: true}" required>
+
+          <input type="text" class="form-control mb-2" placeholder="Phone Number" [(ngModel)]="newHospital.phoneNumber" [ngModelOptions]="{standalone: true}" required>
+
+          <input type="email" class="form-control mb-2" placeholder="Email" [(ngModel)]="newHospital.email" [ngModelOptions]="{standalone: true}" required>
+
+          <input type="text" class="form-control mb-2" placeholder="License Number" [(ngModel)]="newHospital.licenseNumber" [ngModelOptions]="{standalone: true}" required>
+
+          <button class="btn btn-success w-100 mt-3" (click)="addHospital()">Save Hospital</button>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <p >Already have an account? <a href="#" (click)="LoginPage()">Login</a></p>
+      </div>
+
+      <div class="last-heading text-center mt-3">
+        Empowering Health, Enriching Lives – Your Trusted Healthcare Partner.
+      </div>
+    </div>
+  </div>
+</div>

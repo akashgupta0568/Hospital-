@@ -1,0 +1,100 @@
+/* 🔹 Global Styles */
+:root {
+  --background-light: #f9f9f9;
+  --text-light: #333;
+  --card-bg-light: #fff;
+  --primary-light: #007bff;
+  --secondary-light: #0056b3;
+
+  --background-dark: #121212;
+  --text-dark: #f9f9f9;
+  --card-bg-dark: #1e1e1e;
+  --primary-dark: #4a90e2;
+  --secondary-dark: #3572b0;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background: var(--background-light);
+  color: var(--text-light);
+  margin: 0;
+  padding: 0;
+  transition: 0.3s ease-in-out;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background: var(--background-dark);
+  color: var(--text-dark);
+}
+
+/* 🔹 Services Section */
+.services {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.services h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--primary-light);
+}
+
+.dark-mode .services h2 {
+  color: var(--primary-dark);
+}
+
+/* 🔹 Services Container */
+.service-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* 🔹 Service Cards */
+.service-card {
+  background: var(--card-bg-light);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--primary-light);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.dark-mode .service-card {
+  background: var(--card-bg-dark);
+  border: 2px solid var(--primary-dark);
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: var(--primary-light);
+}
+
+.dark-mode .service-card h3 {
+  color: var(--primary-dark);
+}
+
+.service-card p {
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+.dark-mode .service-card p {
+  color: var(--text-dark);
+}
+
+/* 🔹 Responsive Design */
+@media (max-width: 768px) {
+  .service-container {
+    grid-template-columns: 1fr;
+  }
+}

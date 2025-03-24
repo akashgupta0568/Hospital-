@@ -1,0 +1,33 @@
+<div class="billing-container">
+  <div class="header">
+    <h2>Billing & Payments</h2>
+    <button class="back-button" (click)="goBack()">Back</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Invoice ID</th>
+        <th>Patient Name</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bill of bills">
+        <td>{{ bill.id }}</td>
+        <td>{{ bill.patientName }}</td>
+        <td>{{ bill.amount | currency }}</td>
+        <td>
+          <span [ngClass]="bill.status === 'Paid' ? 'status-paid' : 'status-pending'">
+            {{ bill.status }}
+          </span>
+        </td>
+        <td>
+          <button (click)="viewBill(bill.id)">View</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

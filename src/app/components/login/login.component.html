@@ -1,0 +1,72 @@
+<div class="modal fade show d-block" tabindex="-1" *ngIf="showModal">
+  <div class="modal-dialog">
+    <div class="heading">
+      <img src="assets/logo.png" alt="logo" class="logo">
+      <h2>Health Mission</h2>
+      <p>Committed to Your Well-being</p>
+  </div>
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ isRegister ? 'Register' : 'Login' }}</h5>
+        <!-- <button type="button" class="close-btn" (click)="closeModal()">
+          <i class="fas fa-times"></i>
+      </button> -->
+
+
+      </div>
+      <div class="modal-body">
+        <form *ngIf="!isRegister">
+          <input type="text" class="form-control mb-2" placeholder="Email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+          <input type="password" class="form-control mb-2" placeholder="Current-password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+          <button class="btn btn-primary w-100" (click)="login()" [disabled]="isLoading">
+            <p-progressSpinner *ngIf="isLoading" styleClass="w-4rem h-4rem" strokeWidth="8" animationDuration=".5s" />
+            <span *ngIf="!isLoading">Login</span>
+          </button>
+        </form>
+        <form *ngIf="isRegister">
+          <input type="text" class="form-control mb-2" placeholder="Name" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" required>
+          <input type="email" class="form-control mb-2" placeholder="Email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required>
+          <input type="tel" class="form-control mb-2"
+          placeholder="Mobile Number"
+          [(ngModel)]="phoneNumber"
+          name="phoneNumber"
+          [ngModelOptions]="{standalone: true}"
+          pattern="^[0-9]{10}$"
+          required>
+          <input type="password" class="form-control mb-2" placeholder="Password" [(ngModel)]="RegPassword"  [ngModelOptions]="{standalone: true}"  required>
+          <select class="form-control mb-2" #selectoption [(ngModel)]="RoleID" [ngModelOptions]="{standalone: true}" (change)="onRoleChange($event)" required>
+            <option value="0" selected disabled>Select Role</option>
+            <option *ngFor="let role of roles" [value]="role.roleId">{{ role.roleName }}</option>
+          </select>
+
+          <!-- Button to open Add Hospital Modal -->
+            <!-- <button type="button" class="btn btn-primary w-100 mb-2" (click)="openHospitalModal()">+ Add Hospital</button> -->
+
+            <!-- Hospital Dropdown -->
+            <!-- <select class="form-control mb-2" [(ngModel)]="HospitalID" [ngModelOptions]="{standalone: true}" (change)="checkHospitalSelection($event)" required>
+              <option value="0" selected>Select Hospital</option>
+              <option value="add">+ Add Hospital</option>
+              <option *ngFor="let hos of hospitals" [value]="hos.hospitalID">{{ hos.name }}</option>
+            </select> -->
+            <br>
+            <button class="btn btn-success w-100" (click)="register()" [disabled]="isLoading">
+              <p-progressSpinner *ngIf="isLoading" styleClass="w-4rem h-4rem" strokeWidth="8" animationDuration=".5s" />
+              <span *ngIf="!isLoading">Register</span>
+            </button>
+            <!-- <button class="btn btn-success w-100" (click)="register()">Register</button> -->
+        </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <p *ngIf="!isRegister">Don't have an account? <a href="#" (click)="toggleForm()">Register</a></p>
+        <p *ngIf="isRegister">Already have an account? <a href="#" (click)="toggleForm()">Login</a></p>
+      </div>
+      <br>
+      <div class="last-heading">
+        Empowering Health, Enriching Lives – Your Trusted Healthcare Partner.
+      </div>
+    </div>
+  </div>
+</div>

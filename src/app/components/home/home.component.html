@@ -1,0 +1,10 @@
+<div class="container">
+  <h2 class="title">Medical Healthcare Dashboard</h2>
+
+  <div class="dashboard">
+    <div *ngFor="let menu of menuItems" class="menu-card" [routerLink]="menu.link">
+      <i [class]="menu.icon + ' icon'"></i>
+      <h4>{{ menu.title }}</h4>
+    </div>
+  </div>
+</div>

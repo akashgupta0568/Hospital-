@@ -1,0 +1,66 @@
+/* CONTAINER */
+.container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* TITLE */
+.title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+/* DASHBOARD GRID */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 cards per row */
+  gap: 20px;
+  justify-content: center;
+}
+
+/* MENU CARD */
+.menu-card {
+  background: var(--primary-color);
+  color: var(--button-text);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background: var(--secondary-color);
+}
+
+/* ICONS */
+.icon {
+  font-size: 40px;
+  color: var(--button-text);
+  margin-bottom: 10px;
+}
+
+/* RESPONSIVENESS */
+@media (max-width: 1200px) {
+  .dashboard {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 500px) {
+  .dashboard {
+    grid-template-columns: repeat(1, 1fr); /* 1 card per row */
+  }
+}

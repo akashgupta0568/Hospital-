@@ -1,0 +1,134 @@
+/* 🔹 Light & Dark Mode Variables */
+:root {
+  --background-light: #f9f9f9;
+  --text-light: #333;
+  --card-bg-light: #fff;
+  --primary-light: #007bff;
+  --secondary-light: #0056b3;
+
+  --background-dark: #121212;
+  --text-dark: #f9f9f9;
+  --card-bg-dark: #1e1e1e;
+  --primary-dark: #4a90e2;
+  --secondary-dark: #3572b0;
+}
+
+/* 🔹 Contact Page Container */
+.contact-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background: var(--card-bg-light);
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.dark-mode .contact-container {
+  background: var(--card-bg-dark);
+}
+
+/* 🔹 Hero Section */
+.contact-hero {
+  padding: 30px;
+  background: var(--primary-light);
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.dark-mode .contact-hero {
+  background: var(--primary-dark);
+}
+
+/* 🔹 Contact Form */
+.contact-form {
+  background: var(--card-bg-light);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.dark-mode .contact-form {
+  background: var(--card-bg-dark);
+}
+
+/* 🔹 Input Fields */
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background: var(--background-light);
+  color: var(--text-light);
+}
+
+.dark-mode .input-group input,
+.dark-mode .input-group textarea {
+  background: var(--background-dark);
+  color: var(--text-dark);
+  border-color: var(--primary-dark);
+}
+
+/* 🔹 Submit Button */
+.submit-btn {
+  padding: 10px 20px;
+  background: var(--primary-light);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background: var(--secondary-light);
+}
+
+.dark-mode .submit-btn {
+  background: var(--primary-dark);
+}
+
+.dark-mode .submit-btn:hover {
+  background: var(--secondary-dark);
+}
+
+/* 🔹 Contact Info */
+.contact-info {
+  background: var(--card-bg-light);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .contact-info {
+  background: var(--card-bg-dark);
+}
+
+/* 🔹 Responsive Design */
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 15px;
+  }
+
+  .contact-hero,
+  .contact-form,
+  .contact-info {
+    padding: 15px;
+  }
+}

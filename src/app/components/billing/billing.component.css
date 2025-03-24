@@ -1,0 +1,73 @@
+.billing-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: var(--text-color);
+  margin: 0;
+}
+
+.back-button {
+  padding: 8px 15px;
+  border: none;
+  background: var(--primary-color);
+  color: var(--button-text);
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.back-button:hover {
+  background: var(--secondary-color);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: var(--secondary-color);
+  color: var(--button-text);
+}
+
+.status-paid {
+  color: green;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: red;
+  font-weight: bold;
+}
+
+button {
+  padding: 5px 10px;
+  border: none;
+  background: var(--primary-color);
+  color: var(--button-text);
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: var(--secondary-color);
+}

@@ -1,0 +1,10 @@
+<app-header *ngIf="this.showHeader"></app-header>
+
+<!-- Login/Register Modal -->
+
+<div class="main-content"  [ngStyle]="showHeader ? {'margin-top': marginTop} : {}">
+  <p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" preventOpenDuplicates="true"></p-toast>
+  <router-outlet></router-outlet>
+</div>
+
+<!-- <app-footer *ngIf="this.showHeader"></app-footer> -->

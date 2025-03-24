@@ -1,0 +1,228 @@
+/* Add Hospital Container */
+.add-hospital-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.hospital-container-list{
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px 0px;
+}
+
+h2 {
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Buttons */
+.back-button,
+button {
+  padding: 10px;
+  border: none;
+  background: var(--primary-color);
+  color: var(--button-text);
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.back-button:hover,
+button:hover {
+  background: var(--secondary-color);
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  /* gap: 15px; */
+}
+
+/* Form Container */
+.hospital-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Group */
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* Input Field Styling */
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input-container input,
+input, select, textarea {
+  width: 100%;
+  padding: 12px 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  background: var(--background-color);
+  color: var(--text-color);
+  transition: border 0.3s ease-in-out;
+}
+
+.input-container input:focus,
+input:focus, select:focus, textarea:focus {
+  border: 1px solid var(--secondary-color);
+}
+
+/* Floating Label */
+.input-container label {
+  position: absolute;
+  /* top: 50%; */
+  left: 10px;
+  transform: translateY(-50%);
+  background: var(--background-color);
+  padding: 0 5px;
+  font-size: 12px;
+  color: var(--text-color);
+  transition: 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Move label up when input is focused or filled */
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+  top: 0;
+  font-size: 12px;
+  color: var(--secondary-color);
+}
+
+/* Submit Button */
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background: var(--secondary-color);
+  color: var(--button-text);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease-in-out;
+}
+
+.submit-button:hover {
+  background: var(--primary-color);
+}
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .add-hospital-container {
+    padding: 15px;
+  }
+
+  .hospital-container {
+    padding: 15px;
+  }
+
+  .input-container input,
+  input, select, textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .submit-button {
+    font-size: 14px;
+  }
+}
+
+.hospital-details {
+  padding: 16px;
+  background: var(--background-color);
+  border-left: 5px solid var(--primary-color);
+  border-radius: 5px;
+  color: var(--text-color);
+  transition: all 0.3s ease-in-out;
+}
+
+.hospital-details p {
+  margin: 6px 0;
+  font-size: 1rem;
+}
+
+/* 🎯 Action Buttons */
+.hospital-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* 🛠 Custom PrimeNG Buttons */
+/* .p-button {
+  width: 120px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.p-button:hover {
+  transform: scale(1.05);
+} */
+
+/* ✅ Edit Button */
+/* .p-button-info {
+  background: var(--button-bg) !important;
+  border: none;
+  color: var(--button-text) !important;
+}
+
+.p-button-info:hover {
+  background: var(--secondary-color) !important;
+}
+
+/* ❌ Delete Button */
+/* .p-button-danger {
+  background: #d32f2f !important;
+  border: none;
+} */
+
+/* .p-button-danger:hover {
+  background: #c62828 !important;
+}  */
+
+/* 📱 Responsive Design */
+@media screen and (max-width: 600px) {
+  /* .hospital-actions {
+    flex-direction: column;
+    gap: 10px;
+  } */
+
+  /* .hospital-actions .p-button {
+    width: 100%;
+  } */
+}

@@ -1,0 +1,37 @@
+<div class="appointments-container">
+  <div class="header">
+    <h2>Appointments</h2>
+    <button class="back-button" (click)="goBack()">Back</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Patient Name</th>
+        <th>Doctor</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of appointments">
+        <td>{{ appointment.id }}</td>
+        <td>{{ appointment.patient }}</td>
+        <td>{{ appointment.doctor }}</td>
+        <td>{{ appointment.date }}</td>
+        <td>{{ appointment.time }}</td>
+        <td>
+          <span [ngClass]="{'confirmed': appointment.status === 'Confirmed', 'pending': appointment.status === 'Pending'}">
+            {{ appointment.status }}
+          </span>
+        </td>
+        <td>
+          <button (click)="viewAppointment(appointment.id)">View</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

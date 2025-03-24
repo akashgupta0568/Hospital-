@@ -1,0 +1,60 @@
+<div class="hospital-container">
+  <div class="header">
+    <h2>{{ AddHospitalList ? 'Hospitals List' : (editForm ? 'Edit Hospital' : 'Add Hospital') }}</h2>
+    <div>
+      <button class="back-button" (click)="plusHospital()">{{ AddHospitalList ? 'Add Hospital' : 'View Hospitals' }}</button>
+      &nbsp;
+      <button class="back-button" (click)="goBack()">← Back</button>
+    </div>
+  </div>
+
+  <form [formGroup]="hospitalForm" (ngSubmit)="editForm ? updateHospital() : addHospital()" *ngIf="!AddHospitalList">
+    <div class="form-group" *ngFor="let field of ['name', 'address', 'city', 'state', 'zipCode', 'phoneNumber', 'email', 'licenseNumber']">
+      <div class="input-container">
+        <input [type]="field === 'email' ? 'email' : 'text'" [id]="field" [formControlName]="field" required [ngClass]="{'error-border': hospitalForm.get(field)?.invalid && hospitalForm.get(field)?.touched}" />
+        <label [for]="field">{{ field | titlecase }}</label>
+      </div>
+      <div class="error" *ngIf="hospitalForm.get(field)?.invalid && hospitalForm.get(field)?.touched">
+        * {{ field | titlecase }} is required.
+      </div>
+    </div>
+
+    <button type="submit" class="submit-button" [disabled]="hospitalForm.invalid">{{ editForm ? 'Update' : 'Add' }} Hospital</button>
+  </form>
+</div>
+
+<div class="hospital-container-list" *ngIf="AddHospitalList">
+  <p-accordion *ngIf="hospitals.length > 0; else noHospitals">
+    <p-accordionTab *ngFor="let hospital of hospitals">
+      <ng-template pTemplate="header">
+        <div class="hospital-header">
+          <span>{{ hospital.name }}</span>
+          <i class="pi pi-chevron-down"></i>
+        </div>
+      </ng-template>
+
+      <div class="hospital-details">
+        <p><strong>Hospital ID:</strong> {{ hospital.hospitalID }}</p>
+        <p><strong>Name:</strong> {{ hospital.name }}</p>
+        <p><strong>Address:</strong> {{ hospital.address }}</p>
+        <p><strong>City:</strong> {{ hospital.city }}</p>
+        <p><strong>State:</strong> {{ hospital.state }}</p>
+        <p><strong>Zip Code:</strong> {{ hospital.zipCode }}</p>
+        <p><strong>Phone:</strong> {{ hospital.phoneNumber }}</p>
+        <p><strong>Email:</strong> {{ hospital.email }}</p>
+        <p><strong>License Number:</strong> {{ hospital.licenseNumber }}</p>
+        <p><strong>Created At:</strong> {{ hospital.createdAt | date: 'medium' }}</p>
+
+        <div class="hospital-actions">
+          <button pButton pRipple icon="pi pi-pencil" label="Edit" class="p-button-rounded p-button-info" (click)="EditHospital(hospital.hospitalID)"></button>
+          <button pButton pRipple icon="pi pi-trash" label="Delete" class="p-button-rounded p-button-danger" (click)="deleteHospital(hospital.hospitalID)"></button>
+        </div>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+
+  <!-- Show this message if there are no hospitals -->
+  <ng-template #noHospitals>
+    <p class="no-data-message">There are no hospitals in the list.</p>
+  </ng-template>
+</div>

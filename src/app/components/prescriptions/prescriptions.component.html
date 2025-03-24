@@ -1,0 +1,40 @@
+<div class="prescriptions-container">
+  <div class="header">
+    <h2>Prescriptions</h2>
+    <button class="back-button" (click)="goBack()">Back</button>
+  </div>
+
+  <!-- Add Prescription Form -->
+  <div class="form-container">
+    <h3>Add Prescription</h3>
+    <input type="text" placeholder="Patient Name" [(ngModel)]="newPrescription.patient">
+    <input type="text" placeholder="Medicine Name" [(ngModel)]="newPrescription.medicine">
+    <input type="text" placeholder="Dosage" [(ngModel)]="newPrescription.dosage">
+    <button (click)="addPrescription()">Add Prescription</button>
+  </div>
+
+  <!-- Prescription List -->
+  <h3>Prescription List</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Patient</th>
+        <th>Medicine</th>
+        <th>Dosage</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prescription of prescriptions">
+        <td>{{ prescription.id }}</td>
+        <td>{{ prescription.patient }}</td>
+        <td>{{ prescription.medicine }}</td>
+        <td>{{ prescription.dosage }}</td>
+        <td>
+          <button (click)="removePrescription(prescription.id)">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

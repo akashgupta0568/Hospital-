@@ -1,0 +1,33 @@
+<div class="patients-container">
+  <div class="header">
+    <h2>Patient Records</h2>
+
+    <button class="back-button" (click)="goBack()">Back</button>
+  </div>
+  <div>
+    <input type="text" [(ngModel)]="searchText" placeholder="Search by name..." class="search-bar">
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let patient of filteredPatients()">
+        <td>{{ patient.id }}</td>
+        <td>{{ patient.name }}</td>
+        <td>{{ patient.age }}</td>
+        <td>{{ patient.gender }}</td>
+        <td>
+          <button (click)="viewPatient(patient.id)">View</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

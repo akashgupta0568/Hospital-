@@ -1,0 +1,327 @@
+/* Doctor Form Container */
+.add-doctor-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.doctors-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Doctor List Container */
+.doctor-container-list {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px 0px;
+}
+
+h2 {
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Buttons */
+/* .back-button,
+button {
+  padding: 10px;
+  border: none;
+  background: var(--primary-color);
+  color: var(--button-text);
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+} */
+
+.back-button:hover,
+button:hover {
+  background: var(--secondary-color);
+}
+
+.view-button {
+  padding: 8px 15px;
+border: none;
+background: var(--primary-color);
+color: var(--button-text);
+cursor: pointer;
+border-radius: 5px;
+}
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form Container */
+.doctor-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Group */
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* Input Field Styling */
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input-container input,
+input, select, textarea {
+  width: 100%;
+  padding: 12px 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  background: var(--background-color);
+  color: var(--text-color);
+  transition: border 0.3s ease-in-out;
+}
+
+/* Focus effect */
+.input-container input:focus,
+input:focus, select:focus, textarea:focus {
+  border: 1px solid var(--secondary-color);
+}
+
+/* Floating Label */
+.input-container label {
+  position: absolute;
+  /* top: 50%; */
+  left: 10px;
+  transform: translateY(-50%);
+  background: var(--background-color);
+  padding: 0 5px;
+  font-size: 12px;
+  color: var(--text-color);
+  transition: 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Move label up when input is focused or filled */
+/* .input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+  top: 0;
+  font-size: 12px;
+  color: var(--secondary-color);
+} */
+
+
+/* Submit Button */
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background: var(--secondary-color);
+  color: var(--button-text);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease-in-out;
+}
+
+.submit-button:hover {
+  background: var(--primary-color);
+}
+
+/* Error Messages */
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .add-doctor-container {
+    padding: 15px;
+  }
+
+  .doctor-container {
+    padding: 15px;
+  }
+
+  .input-container input,
+  input, select, textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .submit-button {
+    font-size: 14px;
+  }
+}
+
+
+/* Table */
+/* .doctor-container-list {
+  max-width: 700px;
+  margin: auto;
+  padding: 10px;
+  background: #002b36;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-box {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #00acc1;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+
+
+.doctors-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: var(--text-color);
+  margin: 0;
+}
+
+.back-button {
+  padding: 8px 15px;
+  border: none;
+  background: var(--primary-color);
+  color: var(--button-text);
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.back-button:hover {
+  background: var(--secondary-color);
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: var(--secondary-color);
+  color: var(--button-text);
+}
+
+/* Button Styling */
+/* button {
+  padding: 5px 10px;
+  border: none;
+  background: var(--primary-color);
+  color: var(--button-text);
+  cursor: pointer;
+  border-radius: 5px;
+} */
+
+button:hover {
+  background: var(--secondary-color);
+}
+
+/* Search Bar */
+.search-bar {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 250px;
+}
+
+/* 📱 Responsive Table */
+@media screen and (max-width: 600px) {
+  .doctors-container {
+    padding: 10px;
+  }
+
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--primary-color);
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  td:before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+
+  .view-button {
+    padding: 8px 15px;
+  border: none;
+  background: var(--primary-color);
+  color: var(--button-text);
+  cursor: pointer;
+  border-radius: 5px;
+    width: 100%;
+  }
+}
