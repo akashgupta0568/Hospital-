@@ -15,7 +15,7 @@ import { SearchFilterPipe } from "../../search-filter.pipe";
 })
 export class DoctorsComponent {
 
-  hospitals:any=[]
+  hospitals:any=[];
   selectedHospitalId:any;
   doctors:any=[] ;
 
@@ -188,7 +188,7 @@ editingDoctorId: number | null = null; // Store doctor ID when editing
         this.hospitals = response.hospitalList;
         console.log(this.hospitals);
       },
-      (error:any)=>{console.log(error)}
+      (error:any)=>{this.service.showError('Error',error)}
     )
   }
   navigateToHospital() {

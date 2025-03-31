@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const httpinterceptInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log('Intercepted Request:', req);
+  // console.log('Intercepted Request:', req);
 
   // Retrieve token from localStorage
   const authToken = localStorage.getItem('token');

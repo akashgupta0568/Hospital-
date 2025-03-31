@@ -1,33 +1,61 @@
 <div class="patients-container">
   <div class="header">
     <h2>Patient Records</h2>
-
     <button class="back-button" (click)="goBack()">Back</button>
   </div>
-  <div>
-    <input type="text" [(ngModel)]="searchText" placeholder="Search by name..." class="search-bar">
+
+  <div class="form-group">
+    <div class="input-container">
+      <label for="hospitalSelect">Select Hospital:</label>
+      <select id="hospitalSelect" [(ngModel)]="selectedHospitalId" (change)="fetchPatients()">
+        <option [value]="null" disabled>Select a Hospital</option>
+        <option *ngFor="let hospital of hospitals" [value]="hospital.hospitalID">
+          {{ hospital.name }}
+        </option>
+      </select>
+    </div>
   </div>
 
-  <table>
+
+  <div>
+    <input type="text" [(ngModel)]="searchText" placeholder="Searching..." class="search-bar" style="margin: 0px;">
+  </div>
+  <!-- Show table only if patients exist -->
+  <table *ngIf="patients.length > 0">
     <thead>
       <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Age</th>
         <th>Gender</th>
+        <th>Mobile Number</th>
+        <th>CreatedAt</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let patient of filteredPatients()">
-        <td>{{ patient.id }}</td>
+      <tr *ngFor="let patient of patients | searchFilter: searchText;let index = index">
+        <td>{{ index + 1 }}</td> <!-- Display row number -->
         <td>{{ patient.name }}</td>
-        <td>{{ patient.age }}</td>
+        <td>{{ patient.age ?? 0 }}</td>
         <td>{{ patient.gender }}</td>
+        <td> {{patient.phone}}</td>
+        <td>{{ patient.createdAt | date:'yyyy-MM-dd'  }}</td>
         <td>
-          <button (click)="viewPatient(patient.id)">View</button>
+          <button (click)="viewPatient(patient.patientID)">View</button>
+          &nbsp;
+          <button (click)="addAppointment(patient.patientID)">Add Appointment</button>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <!-- Show message if no patients are found -->
+   <div *ngIf="patients.length === 0" class="no-patients-message">
+    <p >
+      This hospital has no patients.
+    </p>
+    <button [routerLink]="['/appointments']">Add Appointment</button>
+   </div>
+
 </div>

@@ -131,16 +131,6 @@ input:focus, select:focus, textarea:focus {
   pointer-events: none;
 }
 
-/* Move label up when input is focused or filled */
-/* .input-container input:focus + label,
-.input-container input:not(:placeholder-shown) + label {
-  top: 0;
-  font-size: 12px;
-  color: var(--secondary-color);
-} */
-
-
-/* Submit Button */
 .submit-button {
   width: 100%;
   padding: 12px;
@@ -185,38 +175,6 @@ input:focus, select:focus, textarea:focus {
   }
 }
 
-
-/* Table */
-/* .doctor-container-list {
-  max-width: 700px;
-  margin: auto;
-  padding: 10px;
-  background: #002b36;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.search-box {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #00acc1;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-
-
-.doctors-container {
-  max-width: 900px;
-  margin: 20px auto;
-  padding: 20px;
-  background: var(--background-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Header Styling */
 .header {
   display: flex;
   justify-content: space-between;
@@ -260,15 +218,7 @@ th {
   color: var(--button-text);
 }
 
-/* Button Styling */
-/* button {
-  padding: 5px 10px;
-  border: none;
-  background: var(--primary-color);
-  color: var(--button-text);
-  cursor: pointer;
-  border-radius: 5px;
-} */
+
 
 button:hover {
   background: var(--secondary-color);

@@ -17,6 +17,7 @@ import { RegisterUserComponent } from './components/register-user/register-user.
 import { LoginComponent } from './components/login/login.component';
 import { HospitalComponent } from './components/hospital/hospital.component';
 import { AddHospitalComponent } from './components/add-hospital/add-hospital.component';
+import { AppointmentCheckedListComponent } from './components/appointment-checked-list/appointment-checked-list.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent, pathMatch: 'full'},
@@ -28,6 +29,8 @@ export const routes: Routes = [
     { path: 'contact', component: ContactComponent },
     { path: 'patients', component: PatientsComponent },
     { path: 'appointments', component: AppointmentsComponent },
+    { path: 'appointments/checked-list', component: AppointmentCheckedListComponent },
+    { path: 'appointments/:id', component: AppointmentsComponent },
     { path: 'billing', component: BillingComponent },
     { path: 'doctors', component: DoctorsComponent },
     { path: 'prescriptions', component: PrescriptionsComponent },

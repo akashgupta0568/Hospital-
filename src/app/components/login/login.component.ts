@@ -158,22 +158,31 @@ export class LoginComponent implements OnInit {
 
     this.service.register(userPayload).subscribe(
       (response: any) => {
+        console.log('Registration Response:', response);
         localStorage.setItem('NewUserId', response.userId);
         this.isLoading = false;
         this.service.showSuccess('Registration Successful', 'Success');
-        this.email ='';
-        this.RegPassword ='';
-        this.phoneNumber ='';
-        // this.RoleID='';
-        this.name='';
-        // this.router.navigate(['/hospital']);
+
+        // Reset form fields
+        this.email = '';
+        this.RegPassword = '';
+        this.phoneNumber = '';
+        this.name = '';
       },
       (error: any) => {
         this.isLoading = false;
-        this.service.showError(error.message || 'Registration Failed', 'Error');
+        console.error('Registration Error:', error);
+
+        // Show backend error message dynamically
+        if (error.error?.message) {
+          this.service.showError(error.error.message, 'Email or phone number is not valid for Registration '); // Show the exact backend message
+        } else {
+          this.service.showError('Registration Failed. Please try again.', 'Error');
+        }
       }
     );
   }
+
 
   /** Check if User Wants to Add a New Hospital */
   checkHospitalSelection(event: any): void {

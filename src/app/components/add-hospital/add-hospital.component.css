@@ -226,3 +226,7 @@ input:focus, select:focus, textarea:focus {
     width: 100%;
   } */
 }
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -99,8 +99,41 @@ export class CommonserviceService {
   updateDoctorById(doctorId: number, doctorData: any) {
     return this.http.put(`${this.apiUrl}doctors/update/${doctorId}`, doctorData);
   }
+
+  getPatients(hospitalId?: number, createdByUserId?: number): Observable<any> {
+    let params = new HttpParams();
+
+    if (hospitalId !== undefined && hospitalId !== null) {
+      params = params.set('hospitalId', hospitalId.toString());
+    }
+    if (createdByUserId !== undefined && createdByUserId !== null) {
+      params = params.set('createdByUserId', createdByUserId.toString());
+    }
+
+    return this.http.get<any>(`${this.apiUrl}patients/fetchlistAdmin&User`, { params });
+  }
+
+  getPatientByID(patientId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}patients/${patientId}`);
+  }
+
+  addAppointmentAndPayment(appointmentData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}appointments/DirectaddAppPay`, appointmentData);
+  }
+  getAppointments(payload: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}appointments/GetAppointments`, payload);
+  }
+  // getAppointments(hospitalId: number, doctorId: number, fromDate: string, toDate: string) {
+  //   const params = new HttpParams()
+  //     .set('hospitalId', hospitalId.toString())
+  //     .set('doctorId', doctorId.toString())
+  //     .set('fromDate', fromDate)
+  //     .set('toDate', toDate);
+
+  //   return this.http.get(`${this.apiUrl}/GetAppointments`, { params });
+  // }
+}
   // Delete a Hospital
   // deleteHospital(id: number): Observable<any> {
   //   return this.http.delete<any>(`${this.baseUrl}/hospitals/${id}`);
   // }
-}

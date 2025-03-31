@@ -1,0 +1,137 @@
+<div class="appointments-container">
+  <div class="header">
+    <h2>Appointments List</h2>
+    <div>
+      <button class="back-button fetch" (click)="goBack()">Back</button>
+      &nbsp;
+      <button class="back-button" (click)="loadAppointments()">Fetch</button>
+    </div>
+  </div>
+  <div class="top-line">
+  <!-- Hospital Selection Dropdown -->
+  <div class="form-group">
+    <div class="input-container">
+      <label for="hospitalSelect">Select Hospital:</label>
+      <select id="hospitalSelect" [(ngModel)]="selectedHospitalId" (change)="fetchAppointments()">
+        <option [value]="null" disabled>Select a Hospital</option>
+        <option *ngFor="let hospital of hospitals" [value]="hospital.hospitalID">
+          {{ hospital.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Doctor Selection Dropdown -->
+  <div class="form-group">
+    <div class="input-container">
+      <label for="doctorSelect">Select Doctor:</label>
+      <select id="doctorSelect" [(ngModel)]="selectedDoctorId" (change)="selectedDoctor($event)">
+        <option [value]="null" disabled>Select a Doctor</option>
+        <option *ngFor="let doctor of doctors" [value]="doctor.id">
+          {{ doctor.name }} ({{ doctor.specialization }})
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Date Filters -->
+  <div class="form-group date-filters">
+    <div class="input-container">
+      <label for="fromDate">From Date:</label>
+      <input type="date" id="fromDate" [(ngModel)]="fromDate" (change)="filterAppointments()" [max]="todayDate" >
+    </div>
+  </div>
+  <div class="form-group date-filters">
+    <div class="input-container">
+      <label for="toDate">To Date:</label>
+      <input type="date" id="toDate" [(ngModel)]="toDate" (change)="filterAppointments()" [max]="todayDate">
+    </div>
+  </div>
+
+  </div>
+   <!-- Search Bar -->
+   <div class="form-group">
+    <input type="text" [(ngModel)]="searchText" placeholder="Search..." class="search-bar">
+  </div>
+
+  <!-- Appointments Table -->
+  <div style="overflow: auto;">
+    <table *ngIf="appointments.length > 0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <!-- <th>Patient ID</th> -->
+          <th>Patient Name</th>
+          <!-- <th>Doctor ID</th> -->
+          <th>Doctor Name</th>
+          <th>Specialization</th>
+          <th>Hospital Name</th>
+          <th>Appointment Date & Time</th>
+          <th>Appointment Status</th>
+          <th>Patient Phone</th>
+          <th>Father/Husband Name</th>
+          <th>Doctor Phone</th>
+          <th>Consultation Fee</th>
+          <th>Amount</th>
+          <!-- <th>Payment ID</th> -->
+          <th>Payment Date</th>
+          <th>Payment Status</th>
+          <th>Payment Method</th>
+          <!-- <th>Actions</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointments | searchFilter: searchText; let index = index">
+          <td>{{ index + 1 }}</td>
+          <!-- <td>{{ appointment.patientID }}</td> -->
+          <td>{{ appointment.patientName }}</td>
+          <!-- <td>{{ appointment.doctorID }}</td> -->
+          <td>{{ appointment.doctorName }}</td>
+          <td>{{ appointment.specialization }}</td>
+          <td>{{ appointment.hospitalName }}</td>
+          <td>{{ appointment.appointmentDate | date: 'yyyy-MM-dd' }} {{ appointment.appointmentTime }}</td>
+          <td>
+            <span class="badge" [ngClass]="appointment.appointmentStatus === 'Checked' ? 'bg-success' : 'bg-warning'">
+              {{ appointment.appointmentStatus }}
+            </span>
+          </td>
+          <td>{{ appointment.patientPhone }}</td>
+          <td>{{ appointment.fatherHusbandName }}</td>
+          <td>{{ appointment.doctorPhone }}</td>
+          <!-- <td>{{ appointment.paymentID }}</td> -->
+          <td>{{ appointment.consultationFee }}</td>
+          <td>{{appointment.amount}}</td>
+          <td>{{ appointment.paymentDate | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ appointment.paymentStatus }}</td>
+          <td>{{ appointment.paymentMethod }}</td>
+
+          <!-- <td>
+            <button (click)="viewAppointment(appointment.appointmentID)">View</button>
+            &nbsp;
+            <button (click)="markChecked(appointment.appointmentID)" *ngIf="appointment.appointmentStatus !== 'Checked'">
+              Mark as Checked
+            </button>
+          </td> -->
+        </tr>
+        <tr *ngIf="(appointments | searchFilter: searchText).length === 0">
+          <td colspan="15" class="text-center"><strong>No records found.</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <tr>
+        <td colspan="9" class="text-right"><strong>Summary</strong></td>
+        <td class="text-right"><strong>Total:</strong></td>
+        <td><strong>TotalConsultationFee: {{ getTotalConsultationFee() }}</strong></td>
+        <td><strong>TotalAmount: {{ getTotalAmount() }}</strong></td>
+        <td colspan="3"></td>
+      </tr>
+    </div>
+  </div>
+
+  <!-- Show message if no appointments are found -->
+  <div *ngIf="appointments.length === 0" class="no-appointments-message">
+    <p>No checked appointments found.</p>
+    <button [routerLink]="['/appointments']">Add Appointment</button>
+  </div>
+</div>

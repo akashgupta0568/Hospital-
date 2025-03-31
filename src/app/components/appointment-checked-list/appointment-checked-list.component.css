@@ -1,4 +1,4 @@
-.patients-container {
+.appointments-container {
   max-width: 900px;
   margin: 20px auto;
   padding: 10px;
@@ -14,6 +14,15 @@
   align-items: center;
   margin-bottom: 10px;
   padding: 10px 0px;
+}
+
+.top-line{
+  display: flex;
+  justify-content: space-around;
+  /* align-items: center; */
+  width: 100%;
+  border-left: solid ;
+    border-right: solid ;
 }
 
 h2 {
@@ -79,7 +88,7 @@ button:hover {
 
 /* Search Bar */
 .search-bar {
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 16px;
@@ -90,19 +99,23 @@ button:hover {
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
-  /* .patients-container {
-    padding: 15px;
-    margin: 10px;
+  .form-group {
+    position: relative;
+    /* margin-bottom: 20px; */
+    margin: 5px 0px;
+    width: 11rem;
   }
-
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  } */
-
+  .top-line {
+    display: flex;
+    flex-wrap: wrap;
+    /* align-items: center; */
+    justify-content: space-around;
+    border-left: solid ;
+    border-right: solid ;
+  }
   .search-bar {
-    width: 100%;
-    margin-top: 10px;
+    /* width: 100%; */
+    /* margin-top: 10px; */
   }
 
   table {
@@ -130,22 +143,18 @@ button:hover {
 }
 
 @media screen and (max-width: 480px) {
-  /* .header {
-    flex-direction: column;
+  .form-group {
+    position: relative;
+    /* margin-bottom: 20px; */
+    margin: 5px 0px;
+    width: 11rem;
+  }
+  .top-line {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-  } */
-
-  /* h2 {
-    text-align: center;
-    font-size: 18px;
-  } */
-
-  /* .back-button {
-    width: 100%;
-    text-align: center;
-    margin-top: 5px;
-  } */
-
+    justify-content: space-around;
+  }
   th, td {
     font-size: 16px;
     padding: 10px;
@@ -158,23 +167,21 @@ button:hover {
   tbody tr {
     padding: 2px;
   }
-
-  /* button {
-    width: 100%;
-    padding: 6px;
-  } */
-}
-
-.form-group {
-  position: relative;
-  margin-bottom: 20px;
 }
 
 /* Input Field Styling */
+.form-group {
+  position: relative;
+  /* margin-bottom: 20px; */
+  margin: 5px 0px;
+  width: 10rem;
+}
+
 .input-container {
   position: relative;
   width: 100%;
 }
+
 .input-container input,
 input, select, textarea {
   width: 100%;
@@ -187,6 +194,7 @@ input, select, textarea {
   color: var(--text-color);
   transition: border 0.3s ease-in-out;
 }
+
 .input-container input:focus,
 input:focus, select:focus, textarea:focus {
   border: 1px solid var(--secondary-color);
@@ -195,7 +203,6 @@ input:focus, select:focus, textarea:focus {
 /* Floating Label */
 .input-container label {
   position: absolute;
-  /* top: 50%; */
   left: 10px;
   transform: translateY(-50%);
   background: var(--background-color);
