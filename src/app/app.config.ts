@@ -8,6 +8,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { MessageService } from 'primeng/api';
 import { ProgressSpinner } from 'primeng/progressspinner';
+import { CommonserviceService } from './commonservice.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     //   preventDuplicates: true
     // }),
     MessageService,
-    ProgressSpinner
+    ProgressSpinner,
+    CommonserviceService
   ]
 };

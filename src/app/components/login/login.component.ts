@@ -4,11 +4,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule, ProgressSpinnerModule],
+  // providers: [MessageService,ToastModule,CommonserviceService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -44,7 +47,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private renderer: Renderer2,
     private service: CommonserviceService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService,
+
   ) {}
 
   ngOnInit(): void {
@@ -102,29 +107,46 @@ export class LoginComponent implements OnInit {
 
     this.service.login(user).subscribe(
       (response: any) => {
+        if(response.message === 'Login successful!') {
+        console.log('Login Response:', response);
         localStorage.setItem('token', response.token);
         localStorage.setItem('role', response.roleName);
         localStorage.setItem('Email', this.email);
         localStorage.setItem('Password', this.password);
         localStorage.setItem('UserLoginId', response.userId);
         localStorage.removeItem('NewUserId');
-        this.service.showSuccess('Login Successful', 'Welcome to the Dashboard!');
-
+        // this.service.showSuccess('Login Successful', 'Welcome to the Dashboard!');
+        this.router.navigate(['/home']);
+        this.messageService.add({ severity: 'success', summary: 'Login Successful', detail: 'Welcome to the Dashboard!' });
+        this.isLoading = false;
+      }
         // Redirect based on Role
-        const roleRoutes: { [key: string]: string } = {
-          Admin: '/home',
-          Doctor: '/doctor/dashboard',
-          Patient: '/patient/dashboard',
-          Staff: '/staff/dashboard',
-        };
+        // const roleRoutes: { [key: string]: string } = {
+        //   Admin: '/home',
+        //   Doctor: '/doctor/dashboard',
+        //   Patient: '/patient/dashboard',
+        //   Staff: '/staff/dashboard',
+        // };
 
-        this.router.navigate([roleRoutes[response.roleName] || '/login']);
+        // this.router.navigate([roleRoutes[response.roleName] || '/login']);
+        else {
+          // this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: 'Invalid email or password.' });
+          this.router.navigate(['/login']);
+          this.isLoading = false;
+        }
       },
-      (error) => {
-        this.service.showError('Login Failed', 'Invalid email or password.');
+      (error:any) => {
+        // this.service.showError(error.message, 'Invalid email or password.');
+        // alert('Invalid email or password.');
+        this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: error.error.message });
+        // this.service.showError('Invalid email or password.', 'Login Failed');
         this.isLoading = false;
       }
     );
+  }
+
+  showSuccessMessage() {
+    this.service.showSuccess('Login Successful', 'Welcome to your dashboard!');
   }
 
   /** Check if User is Already Logged In */
@@ -158,27 +180,27 @@ export class LoginComponent implements OnInit {
 
     this.service.register(userPayload).subscribe(
       (response: any) => {
+        if (!response.success) {
         console.log('Registration Response:', response);
         localStorage.setItem('NewUserId', response.userId);
         this.isLoading = false;
-        this.service.showSuccess('Registration Successful', 'Success');
+        this.messageService.add({ severity: 'success', summary: 'Registration Successful', detail: 'You can now log in!' });
 
         // Reset form fields
         this.email = '';
         this.RegPassword = '';
         this.phoneNumber = '';
         this.name = '';
+        }
+        else {
+          this.isLoading = false;
+          this.messageService.add({ severity: 'error', summary: 'Registration Failed', detail: 'Please try again.' });
+        }
       },
       (error: any) => {
         this.isLoading = false;
         console.error('Registration Error:', error);
-
-        // Show backend error message dynamically
-        if (error.error?.message) {
-          this.service.showError(error.error.message, 'Email or phone number is not valid for Registration '); // Show the exact backend message
-        } else {
-          this.service.showError('Registration Failed. Please try again.', 'Error');
-        }
+        this.messageService.add({ severity: 'error', summary: 'Registration Failed', detail: error.error.message });
       }
     );
   }

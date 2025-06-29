@@ -18,27 +18,27 @@ import { LoginComponent } from './components/login/login.component';
 import { HospitalComponent } from './components/hospital/hospital.component';
 import { AddHospitalComponent } from './components/add-hospital/add-hospital.component';
 import { AppointmentCheckedListComponent } from './components/appointment-checked-list/appointment-checked-list.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
-    { path: '', component: LoginComponent, pathMatch: 'full'},
-    { path: 'hospital', component:HospitalComponent},
-    { path: 'add-hospital', component: AddHospitalComponent},
-    { path: 'home', component: HomeComponent },
-    { path: 'about', component: AboutComponent },
-    { path: 'services', component: ServicesComponent },
-    { path: 'contact', component: ContactComponent },
-    { path: 'patients', component: PatientsComponent },
-    { path: 'appointments', component: AppointmentsComponent },
-    { path: 'appointments/checked-list', component: AppointmentCheckedListComponent },
-    { path: 'appointments/:id', component: AppointmentsComponent },
-    { path: 'billing', component: BillingComponent },
-    { path: 'doctors', component: DoctorsComponent },
-    { path: 'prescriptions', component: PrescriptionsComponent },
-    { path: 'lab-tests', component: LabTestsComponent },
-    { path: 'inventory', component: InventoryComponent },
-    { path: 'emergency', component: EmergencyComponent },
-    { path: 'reports', component: ReportsComponent },
-    { path: 'settings', component: SettingsComponent },
-    { path: 'register', component: RegisterUserComponent }
-
+  { path: '', component: LoginComponent, pathMatch: 'full' },
+  { path: 'hospital', component: HospitalComponent, canActivate: [authGuard] },
+  { path: 'add-hospital', component: AddHospitalComponent, canActivate: [authGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'about', component: AboutComponent },
+  { path: 'services', component: ServicesComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'patients', component: PatientsComponent, canActivate: [authGuard] },
+  { path: 'appointments', component: AppointmentsComponent, canActivate: [authGuard] },
+  { path: 'appointments/checked-list', component: AppointmentCheckedListComponent, canActivate: [authGuard] },
+  { path: 'appointments/:id', component: AppointmentsComponent, canActivate: [authGuard] },
+  { path: 'billing', component: BillingComponent, canActivate: [authGuard] },
+  { path: 'doctors', component: DoctorsComponent, canActivate: [authGuard] },
+  { path: 'prescriptions', component: PrescriptionsComponent, canActivate: [authGuard] },
+  { path: 'lab-tests', component: LabTestsComponent, canActivate: [authGuard] },
+  { path: 'inventory', component: InventoryComponent, canActivate: [authGuard] },
+  { path: 'emergency', component: EmergencyComponent, canActivate: [authGuard] },
+  { path: 'reports', component: ReportsComponent, canActivate: [authGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
+  { path: 'register', component: RegisterUserComponent }
 ];

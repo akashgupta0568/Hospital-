@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { CommonserviceService } from '../../commonservice.service';
 
 @Component({
   selector: 'app-register-user',
@@ -28,12 +29,16 @@ export class RegisterUserComponent {
       pharmacy: false,
       labTest: false,
       consultation: false
-    }
+    },
+    hospitalID: ''
   };
 
   userExists = false;
+  hospitals: any;
 
-  constructor(private router: Router, private location: Location) {}
+  constructor(private router: Router, private location: Location, private service: CommonserviceService) {
+    this.GetHospitalsById()
+  }
 
   registerUser() {
     if (this.userExistsCheck(this.user.mobile)) {
@@ -42,6 +47,18 @@ export class RegisterUserComponent {
       alert('User registered successfully!');
       this.router.navigate(['/patients']); // Redirecting to patients list
     }
+  }
+
+  GetHospitalsById() {
+    let userId = localStorage.getItem('UserLoginId');
+    this.service.getHospitalsByCreatedBy(userId).subscribe(
+      (response: any) => {
+        this.hospitals = response.hospitalList ?? response;
+      },
+      (error) => {
+        this.service.showError("Error fetching hospitals:", error);
+      }
+    );
   }
 
   userExistsCheck(mobile: string): boolean {

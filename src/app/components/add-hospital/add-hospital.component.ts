@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
-
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-add-hospital',
   standalone: true,
@@ -20,7 +20,7 @@ export class AddHospitalComponent {
   editForm: boolean = false;
   selectedHospitalId: string | null = null;  // ✅ Fix update issue
 
-  constructor(private fb: FormBuilder, private router: Router, private service: CommonserviceService) {
+  constructor(private fb: FormBuilder, private router: Router, private service: CommonserviceService, private messageService: MessageService) {
     this.service.showHeader();
     this.hospitalForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
@@ -48,13 +48,25 @@ export class AddHospitalComponent {
       };
 
       this.service.addHospital(hospitalData).subscribe(
-        () => {
-          this.service.showSuccess('Success', 'Hospital added successfully!');
+        (res:any) => {
+          console.log(res);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Hospital added successfully!'
+          });
           this.hospitalForm.reset();
           this.GetHospitalsById();
         },
         (error) => {
+          console.log(error.error.message);
+          this.service.showError('Error', error.error.message || 'Failed to add hospital.');
           this.service.showError('Error', 'Failed to add hospital.');
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Failed to add hospital.',
+            detail: error.error.message || 'An error occurred while adding the hospital.'
+          });
         }
       );
     } else {
@@ -95,6 +107,7 @@ export class AddHospitalComponent {
       },
       (error) => {
         this.service.showError('Error', 'Failed to fetch hospital data.');
+        // this.messageService.add({ severity: 'success', summary: 'Login Successful', detail: 'Welcome to the Dashboard!' });
       }
     );
   }

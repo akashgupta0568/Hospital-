@@ -1,11 +1,17 @@
 <div class="appointments-container">
   <div class="header">
     <h2>Appointments List</h2>
-    <div>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
       <button class="back-button fetch" (click)="goBack()">Back</button>
       &nbsp;
       <button class="back-button" (click)="loadAppointments()">Fetch</button>
+      &nbsp;
+      <!-- <button class="back-button" (click)="exportToExcel()">Export to Excel</button> -->
+      <button class="icon-button" (click)="exportToExcel()">
+        <i class="fas fa-file-excel"></i>
+      </button>
     </div>
+
   </div>
   <div class="top-line">
   <!-- Hospital Selection Dropdown -->
@@ -118,7 +124,7 @@
         </tr>
       </tbody>
     </table>
-    <div>
+    <div style="overflow: scroll;">
       <tr>
         <td colspan="9" class="text-right"><strong>Summary</strong></td>
         <td class="text-right"><strong>Total:</strong></td>

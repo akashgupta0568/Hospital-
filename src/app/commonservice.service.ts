@@ -4,7 +4,7 @@ import { MessageService } from 'primeng/api';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CommonserviceService {
 
@@ -20,6 +20,7 @@ export class CommonserviceService {
    private apiUrl = 'https://localhost:7161/api/'; // Replace with your API URL
 
   showSuccess(summary: string, detail: string) {
+    // alert('Success: ' + summary + ' - ' + detail);
     this.messageService.add({ severity: 'success', summary, detail });
   }
 
@@ -122,6 +123,12 @@ export class CommonserviceService {
   }
   getAppointments(payload: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}appointments/GetAppointments`, payload);
+  }
+
+  downloadAppointments(requestData: any) {
+    return this.http.post(`${this.apiUrl}appointments/DownloadAppointments`, requestData, {
+      responseType: 'blob' // Important to receive file data
+    });
   }
   // getAppointments(hospitalId: number, doctorId: number, fromDate: string, toDate: string) {
   //   const params = new HttpParams()

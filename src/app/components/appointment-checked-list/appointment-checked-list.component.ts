@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonserviceService } from '../../commonservice.service';
 import { Router, RouterModule } from '@angular/router';
 import { SearchFilterPipe } from '../../search-filter.pipe';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-appointment-checked-list',
@@ -28,7 +29,8 @@ export class AppointmentCheckedListComponent {
     private appointmentService: CommonserviceService,
     private hospitalService: CommonserviceService,
     private doctorService: CommonserviceService,
-    private router: Router
+    private router: Router,
+    private messageservice: MessageService
   ) {
     const today = new Date();
     today.setMinutes(today.getMinutes() - today.getTimezoneOffset()); // Adjust for timezone
@@ -133,6 +135,31 @@ export class AppointmentCheckedListComponent {
   // Navigate Back
   goBack() {
     this.router.navigate(['/home']);
+  }
+
+  exportToExcel() {
+    if (!this.selectedHospitalId || !this.selectedDoctorId) {
+      // this.appointmentService.showError('Error','Please select a hospital and doctor before downloading.');
+      this.messageservice.add({ severity: 'error', summary: 'Error', detail: 'Please select a hospital and doctor before downloading.' });
+      return;
+    }
+    const requestData = {
+      hospitalId: Number(this.selectedHospitalId),
+      doctorId: Number(this.selectedDoctorId),
+      fromDate: this.fromDate ? new Date(this.fromDate).toISOString() : null,
+      toDate: this.toDate ? new Date(this.toDate).toISOString() : null
+    };
+    console.log("Request data for downloading Excel:", requestData);
+
+    this.appointmentService.downloadAppointments(requestData)
+      .subscribe(blob => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'Appointments.xlsx';
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+      this.messageservice.add({ severity: 'success', summary: 'Success', detail: 'Excel file downloaded successfully.' });
   }
 
   // View Appointment Details

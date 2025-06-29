@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit, Renderer2} from '@angular/core';
+import { Component, HostListener, OnInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
@@ -9,15 +10,15 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FormsModule, CommonModule,ToastModule,ButtonModule,RippleModule],
+  imports: [RouterOutlet, HeaderComponent, FormsModule, CommonModule, ToastModule, ButtonModule, RippleModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  // providers: [MessageService]
+  providers: [MessageService,ToastModule]
 })
 export class AppComponent implements OnInit {
 
@@ -28,36 +29,44 @@ export class AppComponent implements OnInit {
   phoneNumber: string = '';
   name: string = '';
   isLoggedIn: boolean = false;
-  roles:any;
-  RoleID:any = 0;
-  RegPassword:string='';
-  HospitalID:any = 0;
+  roles: any;
+  RoleID: any = 0;
+  RegPassword: string = '';
+  HospitalID: any = 0;
   hospitals: any;
   showHeader: boolean = false;
   marginTop: string = '85px';
-  constructor(private renderer: Renderer2,private service : CommonserviceService,private messageService: MessageService) {
+
+  constructor(
+    private renderer: Renderer2,
+    private service: CommonserviceService,
+    private messageService: MessageService,
+    private router: Router,
+    private titleService: Title,
+    private meta: Meta
+  ) {
     this.updateMargin();
   }
 
-  title = 'hospital';
-
-  show() {
-    this.messageService.add({ summary: 'Success', detail: 'Message Content' });
-}
+  title = 'Hospital Management System';
 
   ngOnInit() {
     this.service.showHeader$.subscribe((isVisible) => {
       this.showHeader = isVisible;
-      console.log(this.showHeader);
     });
-    this.showModal = true;
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      this.renderer.addClass(document.body, 'dark-mode');
-    }
 
+    this.showModal = true;
+    this.applySavedTheme();
     this.checkUserData();
-    // this.getRoles();
+
+    // Set SEO Meta Tags
+    this.titleService.setTitle('Hospital Management System');
+    this.meta.addTags([
+      { name: 'description', content: 'Manage hospital records, billing, appointments, and more.' },
+      { name: 'keywords', content: 'hospital, management, patients, doctors, appointments, billing' },
+      { name: 'author', content: 'YourCompanyName' },
+      { name: 'robots', content: 'index, follow' }
+    ]);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -67,41 +76,39 @@ export class AppComponent implements OnInit {
 
   updateMargin() {
     const screenWidth = window.innerWidth;
-    if (screenWidth < 768) {
-      // Mobile & Tablet view
-      this.marginTop = '66px';
-    } else {
-      // Desktop view
-      this.marginTop = '80px';
+    this.marginTop = screenWidth < 768 ? '66px' : '80px';
+  }
+
+  applySavedTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      this.renderer.addClass(document.body, 'dark-mode');
     }
   }
 
-  getRoles(){
+  show() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
+  }
+
+  getRoles() {
     this.service.getRoles().subscribe({
-      next: (res :any)=>{
-        console.log(res);
+      next: (res: any) => {
         this.roles = res.roles;
         this.hospitals = res.hospitals;
-        console.log(res);
       },
-      error: (error) =>{
+      error: (error) => {
         alert(error);
       },
-      complete:() =>{
-        console.log("Get Request Compelete");
+      complete: () => {
+        console.log("Get Request Complete");
       }
-    })
+    });
   }
 
-  onRoleChange(event:Event) {
+  onRoleChange(event: Event) {
     const target = event.target as HTMLSelectElement;
-    console.log(target.value);
-    if (!target.value) {
-      this.RoleID = ''; // Reset value if not selected
-    }
-
+    this.RoleID = target.value ? target.value : '';
   }
-
 
   toggleForm() {
     this.isRegister = !this.isRegister;
@@ -123,7 +130,7 @@ export class AppComponent implements OnInit {
   }
 
   login() {
-    var user = {
+    const user = {
       identifier: this.email,
       password: this.password
     };
@@ -131,46 +138,36 @@ export class AppComponent implements OnInit {
     this.service.login(user).subscribe({
       next: (response) => {
         if (response.success === 1) {
-          console.log('Login Successful:', response);
-          localStorage.setItem('isLoggedIn', 'true');
-          localStorage.setItem('userData', JSON.stringify(user));
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('userId', response.userId);
+          this.isLoggedIn = true;
+          this.showModal = false;
+          this.router.navigate(['/dashboard']);
         }
       },
       error: (error) => {
-       if (error.status === 0) {
-      alert("Server is not responding. Please try again later.");
-    } else {
-      alert(`Login failed: ${error.message}`);
-    }
+        if (error.status === 0) {
+          alert("Server is not responding. Please try again later.");
+        } else {
+          alert(`Login failed: ${error.message}`);
+        }
       },
       complete: () => {
         console.log('Login request completed');
       }
     });
-    this.closeModal();
   }
 
   checkUserData() {
-    const storedUser = localStorage.getItem('userData');
-    if (storedUser) {
-      try {
-        const user = JSON.parse(storedUser);
-        if (user && user.identifier) {
-          this.showModal = false; // User is valid
-          console.log('User data loaded successfully');
-        } else {
-          this.showModal = true; // Invalid user data
-          console.log('Invalid user data found');
-        }
-      } catch (error) {
-        this.showModal = true; // Error in parsing JSON
-        console.log('Error loading user data');
-      }
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.isLoggedIn = true;
+      this.showModal = false;
     } else {
-      this.showModal = true; // No data found
+      this.isLoggedIn = false;
+      this.showModal = true;
     }
   }
-
 
   register() {
     const userPayload = {
@@ -180,18 +177,37 @@ export class AppComponent implements OnInit {
       Password: this.RegPassword,
       RoleID: this.RoleID,
       HospitalID: this.HospitalID
-    }
-    console.log('User Payload:', userPayload);
+    };
 
-    this.service.register(userPayload).subscribe(
-      (response:any) => {
-        alert('Registration Successful' + response);
+    this.service.register(userPayload).subscribe({
+      next: (response: any) => {
+        alert('Registration Successful');
       },
-      (error:any) => {
+      error: (error: any) => {
         alert(`Registration Failed: ${error.message}`);
       }
-    );
+    });
   }
-    // this.closeModal();
-}
 
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    this.isLoggedIn = false;
+    this.showModal = true;
+    this.router.navigate(['/']);
+  }
+  showSuccessMessage() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Toast message works!' });
+  }
+  showSuccess() {
+    this.service.showSuccess('Success', 'Toast message works!' );
+  }
+  // l() {
+  //   // Example: Show success message after login
+  //   this.messageService.add({
+  //     severity: 'success',
+  //     summary: 'Login Successful',
+  //     detail: 'Welcome to the dashboard!',
+  //   })
+  // }
+}

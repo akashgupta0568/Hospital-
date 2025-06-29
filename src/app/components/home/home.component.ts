@@ -19,13 +19,13 @@ export class HomeComponent {
     { title: 'Appointments', icon: 'fas fa-calendar-check', link: '/appointments' },
     { title: 'Appointment Checked List', icon: 'fas fa-clipboard-check', link: '/appointments/checked-list' },
     { title: 'Billing & Payments', icon: 'fas fa-file-invoice-dollar', link: '/billing' },
-    // { title: 'Prescriptions', icon: 'fas fa-pills', link: '/prescriptions' },
-    // { title: 'Laboratory Tests', icon: 'fas fa-vial', link: '/lab-tests' },
-    // { title: 'Inventory & Pharmacy', icon: 'fas fa-prescription-bottle-alt', link: '/inventory' },
-    // { title: 'Emergency Services', icon: 'fas fa-ambulance', link: '/emergency' },
-    // { title: 'Health Reports', icon: 'fas fa-chart-line', link: '/reports' },
-    // { title: 'Settings & Profile', icon: 'fas fa-cog', link: '/settings' },
-    // { title: 'Register User', icon: 'fas fa-user-plus', link: '/register' }
+    { title: 'Prescriptions', icon: 'fas fa-pills', link: '/prescriptions' },
+    { title: 'Laboratory Tests', icon: 'fas fa-vial', link: '/lab-tests' },
+    { title: 'Inventory & Pharmacy', icon: 'fas fa-prescription-bottle-alt', link: '/inventory' },
+    { title: 'Emergency Services', icon: 'fas fa-ambulance', link: '/emergency' },
+    { title: 'Health Reports', icon: 'fas fa-chart-line', link: '/reports' },
+    { title: 'Settings & Profile', icon: 'fas fa-cog', link: '/settings' },
+    { title: 'Register User', icon: 'fas fa-user-plus', link: '/register' }
   ];
 
   constructor( private service: CommonserviceService){
