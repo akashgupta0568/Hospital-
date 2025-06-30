@@ -17,8 +17,9 @@ export class CommonserviceService {
   hospitals$ = this.hospitals.asObservable();
   constructor(private http: HttpClient,private messageService: MessageService) { }
 
-   private apiUrl = 'https://localhost:7161/api/'; // Replace with your API URL
+   //private apiUrl = 'https://localhost:7161/api/'; // Replace with your API URL
 
+     private apiUrl = 'https://hlmwebapi20250629230138-cna7h3g3frdsadhx.canadacentral-01.azurewebsites.net/api/'; // live url
   showSuccess(summary: string, detail: string) {
     // alert('Success: ' + summary + ' - ' + detail);
     this.messageService.add({ severity: 'success', summary, detail });
